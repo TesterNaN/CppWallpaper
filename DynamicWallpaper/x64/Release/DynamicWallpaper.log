@@ -1,0 +1,15 @@
+﻿  动态壁纸.cpp
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_new
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_new
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_player_play
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_player_set_hwnd
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_release
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_player_set_media_player
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_add_media
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_new_path
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_player_set_playback_mode
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_player_new
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_list_player_set_media_list
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_media_player_new_from_media
+动态壁纸.obj : error LNK2001: 无法解析的外部符号 libvlc_audio_set_volume
+D:\source\repos\DynamicWallpaper\x64\Release\DynamicWallpaper.exe : fatal error LNK1120: 13 个无法解析的外部命令

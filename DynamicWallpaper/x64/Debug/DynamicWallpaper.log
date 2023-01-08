@@ -1,0 +1,3 @@
+﻿  动态壁纸.cpp
+C:\Users\huang\Desktop\动态壁纸.cpp(15): warning C4715: “EnumWindowProcFindDesktopWindow”: 不是所有的控件路径都返回值
+  DynamicWallpaper.vcxproj -> D:\source\repos\DynamicWallpaper\x64\Debug\DynamicWallpaper.exe
