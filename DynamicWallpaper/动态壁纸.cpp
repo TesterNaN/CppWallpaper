@@ -5,6 +5,7 @@
 #include<vlc/vlc.h> 
 #include<tchar.h>
 #pragma  warning (disable:4996) 
+#pragma comment(lib, "libvlc.lib")
 
 HWND workerw;
 static HWND s_hProgmanWnd = nullptr;
@@ -36,6 +37,7 @@ int main() {
         s_hProgmanWnd = ::FindWindowExW(GetDesktopWindow(), nullptr, L"Progman", L"Program Manager");
         if (s_hProgmanWnd == nullptr) {
             std::cout<<"找不到Progman窗体"<<std::endl;
+            system("pause");
             return 1;
         }
         DWORD_PTR lpdwResult = 0;
@@ -68,6 +70,7 @@ int main() {
     }
     if (s_hWorkerWnd == nullptr) {
         std::cout<< "找不到Progman窗体" << std::endl;
+        system("pause");
         return 1;
     }
 	//DWORD_PTR result = 0;
@@ -85,7 +88,8 @@ int main() {
 	
     libvlc_instance_t* inst = libvlc_new(0, nullptr);
     if (inst == nullptr) {
-        std::cout << "Unkonwn Error"<< std::endl;
+        std::cout << "请下载vlc的Plugin文件夹并与exe放在同一目录"<< std::endl;
+        system("pause");
         return 1;
     }
     libvlc_media_t* m = libvlc_media_new_path(inst, videopath);
