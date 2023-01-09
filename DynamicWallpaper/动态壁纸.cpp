@@ -3,22 +3,39 @@
 #include<iostream>
 #define ssize_t SSIZE_T
 #include<vlc/vlc.h> 
+#include<tchar.h>
+#pragma  warning (disable:4996) 
 
 HWND workerw;
 static HWND s_hProgmanWnd = nullptr;
 static HWND s_hWorkerWnd = nullptr;
+
 
 BOOL CALLBACK EnumWindowProcFindDesktopWindow(HWND hwnd, LPARAM lparam){
 	HWND p = ::FindWindowExW(hwnd, nullptr, L"SHELLDLL_DefView", nullptr);
 	if(p == nullptr) return 1;
 	s_hWorkerWnd = ::FindWindowExW(nullptr, hwnd, L"WorkerW", nullptr);
 } 
+
+std::string GetProgramDir()
+{
+    char exeFullPath1[MAX_PATH]; // Full path
+    wchar_t exeFullPath[MAX_PATH];
+    std::string strPath = "";
+    MultiByteToWideChar(CP_UTF8, 0, exeFullPath1, -1,exeFullPath, 0);
+    GetModuleFileName(NULL, exeFullPath, MAX_PATH); //鑾峰彇甯︽湁鍙墽琛屾枃浠跺悕璺緞
+    WideCharToMultiByte(CP_UTF8, 0, exeFullPath, -1, exeFullPath1, 128, NULL , 0);
+    strPath = (std::string)exeFullPath1;
+    int pos = strPath.find_last_of('\\', strPath.length());
+    return strPath.substr(0, pos);  // 杩斿洖涓嶅甫鏈夊彲鎵ц鏂囦欢鍚嶇殑璺緞
+}
+
 int main() {
     if (s_hProgmanWnd == nullptr) {
-        // 先找到Progman 窗口
+        // 鍏堟壘鍒癙rogman 绐楀彛
         s_hProgmanWnd = ::FindWindowExW(GetDesktopWindow(), nullptr, L"Progman", L"Program Manager");
         if (s_hProgmanWnd == nullptr) {
-            std::cout<<"找不到Progman窗体"<<std::endl;
+            std::cout<<"鎵句笉鍒癙rogman绐椾綋"<<std::endl;
             return 1;
         }
         DWORD_PTR lpdwResult = 0;
@@ -50,14 +67,20 @@ int main() {
         }
     }
     if (s_hWorkerWnd == nullptr) {
-        std::cout<< "找不到Progman窗体" << std::endl;
+        std::cout<< "鎵句笉鍒癙rogman绐椾綋" << std::endl;
         return 1;
     }
 	//DWORD_PTR result = 0;
 	//SendMessageTimeout(s_hProgmanWnd, 0x052c, NULL, NULL, SMTO_NORMAL, 1000, &result);
 	//EnumWindows(EnumWindowProcFindDesktopWindow, NULL);
 	
-	char videopath[256]= "video.mp4";
+    char path[256];
+    char v[] = "\\video.mp4";
+    const char* video = v;
+    strcpy_s(path, GetProgramDir().c_str());
+    char* tmp = strcat(path, video);
+    char videopath[256];
+    strcpy_s(videopath, tmp);
 	//WideCharToMultiByte(CP_UTF8, 0, L"video.mp4", -1, videopath, 128, NULL , 0);
 	
     libvlc_instance_t* inst = libvlc_new(0, nullptr);
